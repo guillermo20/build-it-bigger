@@ -3,6 +3,7 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.example.guillermo.myapplication.backend.myApi.MyApi;
 import com.example.jokerandroidlib.JokeDisplayActivity;
@@ -49,16 +50,20 @@ public class EndPointJokerAsyncTask extends AsyncTask<Context, Void, String> {
         try {
             return myApiService.getJoke().execute().getData();
         } catch (IOException e) {
-            return e.getMessage();
+            return null;
         }
     }
 
     @Override
     protected void onPostExecute(String result) {
-        this.result = result;
-        Intent intent = new Intent(context, JokeDisplayActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("joke",result);
-        context.startActivity(intent);
+        if (result!=null){
+            this.result = result;
+            Intent intent = new Intent(context, JokeDisplayActivity.class);
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("joke",result);
+            context.startActivity(intent);
+        }else {
+            Toast.makeText(context,"error retrieving the joke from the backend",Toast.LENGTH_SHORT).show();
+        }
     }
 }

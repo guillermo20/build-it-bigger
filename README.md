@@ -137,3 +137,18 @@ Once you have a functioning project, consider adding more features to test your 
 * Make the free app variant display interstitial ads between the main activity and the joke-displaying activity.
 * Have the app display a loading indicator while the joke is being fetched from the server.
 * Write a Gradle task that starts the GCE dev server, runs all the Android tests, and shuts down the dev server.
+
+
+# NOTES:
+
+* keep in mind that the ip to connect to the backend server is placed on the build.gradle file of the main app folder.
+if it doesn't connect to the backend server you should do this steps.
+
+    1.- place your local ip (not localhost ip) on the Builder api of the asynctask class.
+
+    2.- Edit the Run Configuration for your Appengine backend module:
+        Run->Edit Configurations, select your AppEngine configuration.
+        Uncheck 'Synchronize with build.gradle configuration'.
+        Change the 'Server Address' to 0.0.0.0
+
+    3.- Re-run your Appengine module.

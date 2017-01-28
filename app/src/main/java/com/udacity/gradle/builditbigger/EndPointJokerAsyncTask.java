@@ -13,6 +13,8 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 
 import java.io.IOException;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 /**
  * Created by guillermo on 1/28/17.
  */
@@ -20,6 +22,7 @@ import java.io.IOException;
 public class EndPointJokerAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    public  String  result;
 
     @Override
     protected String doInBackground(Context... params) {
@@ -52,8 +55,9 @@ public class EndPointJokerAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        this.result = result;
         Intent intent = new Intent(context, JokeDisplayActivity.class);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("joke",result);
         context.startActivity(intent);
     }

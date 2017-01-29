@@ -27,7 +27,7 @@ public class EndPointJokerAsyncTaskTest {
         task.execute(context);
         //setting this because is the default time of the api to wait from the server
         //remember that this method is actually an asynchronous method
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         value = task.result;
         Assert.assertNotNull(value);
         Assert.assertTrue("error empty string",!value.isEmpty());

@@ -12,6 +12,30 @@ buildscript {
     }
 }
 
+task testProject {
+    dependsOn(['startGCEServer','runAllTests','shutdownGCEServer'])
+}
+
+task startGCEServer {
+    dependsOn ':jokerbackend:appengineRun'
+    evaluationDependsOn(":jokerbackend")
+    project(':jokerbackend').appengine.daemon = true
+    //notice that i set this property to 0.0.0.0 because i'm using the local server of GCE
+    //exposed through my ip, not only localhost. This was the only way that the tests actually
+    //connected to the dev server for more info pleace read the NOTES section in the readme.md
+    project(':jokerbackend').appengine.httpAddress = '0.0.0.0'
+}
+
+task runAllTests {
+    dependsOn ':app:connectedAndroidTest'
+    mustRunAfter "startGCEServer"
+}
+
+task shutdownGCEServer {
+    dependsOn ':jokerbackend:appengineStop'
+    mustRunAfter "runAllTests"
+}
+
 allprojects {
     repositories {
         jcenter()

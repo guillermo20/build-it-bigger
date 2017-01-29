@@ -48,8 +48,9 @@ public class EndPointJokerAsyncTask extends AsyncTask<Context, Void, String> {
         context = params[0];
 
         try {
+            Thread.sleep(5000);
             return myApiService.getJoke().execute().getData();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             return null;
         }
     }

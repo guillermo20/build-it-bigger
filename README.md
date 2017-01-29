@@ -144,7 +144,7 @@ Once you have a functioning project, consider adding more features to test your 
 * keep in mind that the ip to connect to the backend server is placed on the build.gradle file of the main app folder.
 if it doesn't connect to the backend server you should do this steps.
 
-    1.- place your local ip (not localhost ip) on the Builder api of the asynctask class.
+    1.- place your local ip (not localhost) on the constant of the build.gradle file of the app.
 
     2.- Edit the Run Configuration for your Appengine backend module:
         Run->Edit Configurations, select your AppEngine configuration.
